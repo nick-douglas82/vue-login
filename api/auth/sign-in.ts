@@ -5,7 +5,7 @@ import { getUserByEmail } from '../_utils/api';
 
 export default async (request: VercelRequest, response: VercelResponse) => {
     // Get email and password from request
-    const {email, password} = request.body
+    const { email, password } = request.body
 
     try {
         // Search DB for email and return if found - if not return error
