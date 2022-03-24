@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import pinia, { useUserStore } from '../store'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +16,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard.vue'),
+    beforeEnter:(to, from) => {
+      const userStore = useUserStore(pinia);
+      if (!userStore.isLoggedIn && to.name !== 'Login') {
+        return { name: 'Login' }
+      }
+    },
   },
   {
     path: '/:pathMatch(.*)*', 
