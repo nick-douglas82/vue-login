@@ -1,5 +1,11 @@
 import { PrismaClient } from "@prisma/client"
 
+type UserObject = {
+    email: string,
+    passwordhash: string,
+    name: string
+}
+
 export const getUserByEmail = async (email: string) => {
     const prisma = new PrismaClient()
     return await prisma.user.findFirst({
@@ -9,7 +15,7 @@ export const getUserByEmail = async (email: string) => {
     })
 }
 
-export const updateUser = async (email: string, userObject: {}) => {
+export const updateUser = async (email: string, userObject: UserObject) => {
     const prisma = new PrismaClient()
     return await prisma.user.update({
         data: {
