@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik5pY2siLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IkZvcm11bGExIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJFYvZlFkZEtmZE9lODRrUEtEVUpQeHV2NFJZaWVLendqanB3MFBKSElHaEMxVzBLUHNJYTBPIiwiaWF0IjoxNjQ4MTM4NjEzfQ.XPLtk7z_rRb1FSNhUq3c7gUE5ppYPZ3Dwfvt6-oaql8
+###
+POST http://localhost:3000/api/auth/sign-in
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "Formula1"
+}
+###
+
+PATCH http://localhost:3000/api/auth/account/test@test.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik5pY2siLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IkZvcm11bGExIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJFYvZlFkZEtmZE9lODRrUEtEVUpQeHV2NFJZaWVLendqanB3MFBKSElHaEMxVzBLUHNJYTBPIiwiaWF0IjoxNjQ4MTM4NjEzfQ.XPLtk7z_rRb1FSNhUq3c7gUE5ppYPZ3Dwfvt6-oaql8
+Content-Type: application/json
+
+{
+    "name": "Nick"
+}
+
+###
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Nick Douglas",
+    "email": "nick@nick.com",
+    "password": "Formula1"
+}
+
+###
+POST http://localhost:3000/api/auth/delete/nick@nick.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ik5pY2sgRG91Z2xhcyIsImVtYWlsIjoibmlja0BuaWNrLmNvbSIsInBhc3N3b3JkIjoiIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJFlzNHA1QlAvQkRpQnMxYnN6a3dVLmVuUWxSUks3bXZuazFnQnpweVRhSmYvMFVrRlJIUG8yIiwiaWF0IjoxNjQ4MTQwNjM1fQ.K3uz__wa71Hfz7qqurPeTXAeplmAFZL4DIohEG0-Gi0
