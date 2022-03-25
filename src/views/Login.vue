@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import { logInUser } from '../lib/api'
-import ErrorMessages from '../components/ErrorMessages.vue'
+import { ref } from "vue";
+import { logInUser } from "../lib/api";
+import ErrorMessages from "../components/ErrorMessages.vue";
 
-const email = ref('')
-const password = ref('')
+const email = ref("");
+const password = ref("");
 
-const submitForm = () => logInUser(email.value, password.value)
+const submitForm = () => logInUser(email.value, password.value);
 </script>
 
 <template>
@@ -23,19 +23,40 @@ const submitForm = () => logInUser(email.value, password.value)
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
               <div class="mt-1">
-                <input v-model="email" id="email" name="email" type="email" autocomplete="email" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                <input
+                  v-model="email"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
               </div>
             </div>
 
             <div class="space-y-1">
               <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
               <div class="mt-1">
-                <input v-model="password" id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                <input
+                  v-model="password"
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
               </div>
             </div>
 
             <div>
-              <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign in</button>
+              <button
+                type="submit"
+                class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Sign in
+              </button>
             </div>
           </form>
         </div>
