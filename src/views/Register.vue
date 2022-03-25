@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { logInUser } from "../lib/api";
+import { createNewUser } from "../lib/api";
 import ErrorMessages from "../components/ErrorMessages.vue";
 
 const email = ref("");
 const name = ref("");
 const password = ref("");
 
-const submitForm = () => {
-  console.log("we got here!");
-};
+const submitForm = () => createNewUser(email.value, name.value, password.value);
 </script>
 
 <template>

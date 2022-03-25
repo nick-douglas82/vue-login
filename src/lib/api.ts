@@ -20,6 +20,22 @@ export const logInUser = async (email: string, password: string) => {
   }
 };
 
+export const createNewUser = async (email: string, name: string, password: string) => {
+  const errorStore = useErrorStore();
+
+  const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/register`, {
+    method: "POST",
+    ...defaultOptions,
+    body: JSON.stringify({ email, name, password }),
+  });
+  if (response.status >= 200 && response.status <= 299) {
+    await response.json();
+    router.push("/");
+  } else {
+    errorStore.addError(`Error logging in: ${await response.text()}`);
+  }
+};
+
 // export const api = async <T>(url: string, init?: RequestInit): Promise<T> => {
 //   const response = await apiResponse(url, init);
 //   return await response.json();
