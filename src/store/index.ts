@@ -9,7 +9,7 @@ export type User = {
   email: string,
 }
 
-export type RootState = {
+export type UserRootState = {
   isAuthenticated: boolean,
   user: User,
   accessToken: string
@@ -24,7 +24,7 @@ export const useUserStore = defineStore({
       email: '',
     },
     accessToken: ''
-  } as RootState),
+  } as UserRootState),
 
   actions: {
     logUserIn(token: string, user: User) {
@@ -51,5 +51,28 @@ export const useUserStore = defineStore({
     jwtToken: (state) => state.accessToken,
     isLoggedIn: (state) => state.isAuthenticated,
     getUser: (state) => state.user
+  }
+})
+
+export type ErrorRootState = {
+  errors: Array<string>
+};
+
+export const useErrorStore = defineStore({
+  id: 'errorStore',
+  state: () => ({
+    errors: []
+  } as ErrorRootState),
+  actions: {
+    addError(error: string) {
+      this.errors.push(error)
+    },
+    clearErrors() {
+      this.errors = []
+    }
+  },
+  getters: {
+    getErrors: (state) => state.errors,
+    hasErrors: (state) => state.errors.length > 0
   }
 })

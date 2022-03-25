@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { logInUser } from '../lib/api'
-import { useRouter } from 'vue-router'
+import ErrorMessages from '../components/ErrorMessages.vue'
 
 const email = ref('')
 const password = ref('')
 
-const router = useRouter()
-
-const submitForm = () => {
-  logInUser(email.value, password.value)
-}
+const submitForm = () => logInUser(email.value, password.value)
 </script>
 
 <template>
@@ -21,7 +17,7 @@ const submitForm = () => {
           <img class="w-auto h-12" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
           <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         </div>
-
+        <ErrorMessages />
         <div class="mt-8">
           <form method="POST" class="space-y-6" @submit.prevent="submitForm()">
             <div>
@@ -35,17 +31,6 @@ const submitForm = () => {
               <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
               <div class="mt-1">
                 <input v-model="password" id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="flex items-center">
-                <input id="remember-me" name="remember-me" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
-                <label for="remember-me" class="block ml-2 text-sm text-gray-900">Remember me</label>
-              </div>
-
-              <div class="text-sm">
-                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
               </div>
             </div>
 
