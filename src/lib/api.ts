@@ -1,24 +1,24 @@
-import { useErrorStore, User, useUserStore } from '../store'
-import router from '../router'
-import defaultOptions from "./defaultOptions"
-
+import { useErrorStore, useUserStore } from "../store";
+import router from "../router";
+import defaultOptions from "./defaultOptions";
 
 export const logInUser = async (email: string, password: string) => {
   const userStore = useUserStore();
   const errorStore = useErrorStore();
 
   const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/sign-in`, {
-    method: 'POST',
+    method: "POST",
     ...defaultOptions,
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ email, password }),
   });
   if (response.status >= 200 && response.status <= 299) {
     const jsonResponse = await response.json();
     userStore.logUserIn(jsonResponse.accessToken, jsonResponse.user);
+    router.push("/dashboard");
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
   }
-}
+};
 
 // export const api = async <T>(url: string, init?: RequestInit): Promise<T> => {
 //   const response = await apiResponse(url, init);
