@@ -28,7 +28,6 @@ export const createJwtCookie = (user: CookieParams): string => {
 };
 
 export const verifyCookie = (header: string | null): CookieParams | undefined => {
-  console.log("header :>> ", header);
   if (!header) return;
 
   const cookies = cookie.parse(header);

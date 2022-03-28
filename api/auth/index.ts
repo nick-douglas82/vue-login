@@ -7,7 +7,6 @@ export default async (request: VercelRequest, response: VercelResponse) => {
   const cookiePayload = verifyCookie(request.headers.cookie);
 
   if (!cookiePayload) {
-    console.log("No cookie found");
     response.setHeader("Set-Cookie", clearCookie());
 
     response.status(401).json({
