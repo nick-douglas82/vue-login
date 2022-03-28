@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { useUserStore } from "../store";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
 
+const userStore = useUserStore();
+const { name, email } = userStore.getUser;
+const initials = name.split(" ");
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  name: name,
+  email: email,
+  short: `${initials[0]?.charAt(0)}${initials[1] ? initials[1].charAt(0) : ""}`,
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -52,7 +56,9 @@ const userNavigation = [
               <div>
                 <MenuButton class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" :src="user.imageUrl" alt="" />
+                  <span class="inline-flex items-center justify-center w-8 h-8 bg-gray-500 rounded-full">
+                    <span class="text-sm font-medium leading-none text-white">{{ user.short }}</span>
+                  </span>
                 </MenuButton>
               </div>
               <transition
@@ -97,7 +103,9 @@ const userNavigation = [
         <div class="pt-4 pb-3 border-t border-gray-200">
           <div class="flex items-center px-4">
             <div class="flex-shrink-0">
-              <img class="w-10 h-10 rounded-full" :src="user.imageUrl" alt="" />
+              <span class="inline-flex items-center justify-center w-8 h-8 bg-gray-500 rounded-full">
+                <span class="text-sm font-medium leading-none text-white">{{ user.short }}</span>
+              </span>
             </div>
             <div class="ml-3">
               <div class="text-base font-medium text-gray-800">{{ user.name }}</div>

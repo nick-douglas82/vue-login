@@ -4,12 +4,10 @@ const pinia = createPinia();
 
 export default pinia;
 
-export type User =
-  | {
-      name: string;
-      email: string;
-    }
-  | {};
+export type User = {
+  name: string;
+  email: string;
+};
 
 export type UserRootState = {
   isAuthenticated: boolean;
@@ -34,7 +32,7 @@ export const useUserStore = defineStore({
     },
     logUserOut() {
       this.isAuthenticated = false;
-      this.setUser({});
+      this.setUser({ name: "", email: "" });
     },
     setAuthStatus(authStatus: boolean) {
       this.isAuthenticated = authStatus;
