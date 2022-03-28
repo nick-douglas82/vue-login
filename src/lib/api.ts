@@ -12,8 +12,8 @@ export const checkAuth = async () => {
   });
 
   if (response.status >= 200 && response.status <= 299) {
-    const jsonResponse = await response.json();
-    userStore.logUserIn(jsonResponse.accessToken, jsonResponse.user);
+    const user = await response.json();
+    userStore.logUserIn(user);
     router.push("/dashboard");
   } else {
     console.log(await response.text());
@@ -31,8 +31,8 @@ export const logInUser = async (email: string, password: string) => {
   });
 
   if (response.status >= 200 && response.status <= 299) {
-    const jsonResponse = await response.json();
-    userStore.logUserIn(jsonResponse.accessToken, jsonResponse.user);
+    const user = await response.json();
+    userStore.logUserIn(user);
     router.push("/dashboard");
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);

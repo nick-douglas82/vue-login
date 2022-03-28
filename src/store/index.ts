@@ -1,78 +1,74 @@
 import { defineStore, createPinia } from "pinia";
 
-const pinia = createPinia()
+const pinia = createPinia();
 
 export default pinia;
 
-export type User = {
-  name: string,
-  email: string,
-}
+export type User =
+  | {
+      name: string;
+      email: string;
+    }
+  | {};
 
 export type UserRootState = {
-  isAuthenticated: boolean,
-  user: User,
-  accessToken: string
+  isAuthenticated: boolean;
+  user: User;
 };
 
 export const useUserStore = defineStore({
-  id: 'userStore',
-  state: () => ({
-    isAuthenticated: false,
-    user: {
-      name: '',
-      email: '',
-    },
-    accessToken: ''
-  } as UserRootState),
+  id: "userStore",
+  state: () =>
+    ({
+      isAuthenticated: false,
+      user: {
+        name: "",
+        email: "",
+      },
+    } as UserRootState),
 
   actions: {
-    logUserIn(token: string, user: User) {
-      this.setAuthStatus(true)
-      this.assignJWTToken(token)
-      this.setUser(user)
+    logUserIn(user: User) {
+      this.setAuthStatus(true);
+      this.setUser(user);
     },
     logUserOut() {
-      this.isAuthenticated = false
-      this.assignJWTToken('')
-      this.setUser({ name: '', email: '' })
+      this.isAuthenticated = false;
+      this.setUser({});
     },
     setAuthStatus(authStatus: boolean) {
-      this.isAuthenticated = authStatus
-    },
-    assignJWTToken(token: string) {
-      this.accessToken = token
+      this.isAuthenticated = authStatus;
     },
     setUser(user: User) {
-      this.user = user
-    }
+      this.user = user;
+    },
   },
   getters: {
-    jwtToken: (state) => state.accessToken,
     isLoggedIn: (state) => state.isAuthenticated,
-    getUser: (state) => state.user
-  }
-})
+    getUser: (state) => state.user,
+  },
+});
 
 export type ErrorRootState = {
-  errors: Array<string>
+  errors: Array<string>;
 };
 
 export const useErrorStore = defineStore({
-  id: 'errorStore',
-  state: () => ({
-    errors: []
-  } as ErrorRootState),
+  id: "errorStore",
+  state: () =>
+    ({
+      errors: [],
+    } as ErrorRootState),
   actions: {
     addError(error: string) {
-      this.errors.push(error)
+      this.errors.push(error);
     },
     clearErrors() {
-      this.errors = []
-    }
+      this.errors = [];
+    },
   },
   getters: {
     getErrors: (state) => state.errors,
-    hasErrors: (state) => state.errors.length > 0
-  }
-})
+    hasErrors: (state) => state.errors.length > 0,
+  },
+});
