@@ -1,10 +1,13 @@
-import { useErrorStore, useUserStore } from "../store";
+import { useErrorStore, useUserStore, useTransactionStore } from "../store";
 import router from "../router";
 import defaultOptions from "./defaultOptions";
 
 export const checkAuth = async () => {
   const userStore = useUserStore();
   const errorStore = useErrorStore();
+  const transactionStore = useTransactionStore();
+
+  transactionStore.setIsLoading(true);
 
   const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth`, {
     method: "POST",
@@ -15,14 +18,20 @@ export const checkAuth = async () => {
     const user = await response.json();
     userStore.logUserIn(user);
     router.push("/dashboard");
+    transactionStore.setIsLoading(false);
   } else {
-    console.log(await response.text());
+    const responseBody = await response.json();
+    userStore.setAuthStatus(responseBody.body.auth);
+    transactionStore.setIsLoading(false);
   }
 };
 
 export const logInUser = async (email: string, password: string) => {
   const userStore = useUserStore();
   const errorStore = useErrorStore();
+  const transactionStore = useTransactionStore();
+
+  transactionStore.setIsLoading(true);
 
   const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/sign-in`, {
     method: "POST",
@@ -34,13 +43,18 @@ export const logInUser = async (email: string, password: string) => {
     const user = await response.json();
     userStore.logUserIn(user);
     router.push("/dashboard");
+    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
+    transactionStore.setIsLoading(false);
   }
 };
 
 export const createNewUser = async (email: string, name: string, password: string) => {
   const errorStore = useErrorStore();
+  const transactionStore = useTransactionStore();
+
+  transactionStore.setIsLoading(true);
 
   const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/register`, {
     method: "POST",
@@ -50,37 +64,32 @@ export const createNewUser = async (email: string, name: string, password: strin
   if (response.status >= 200 && response.status <= 299) {
     await response.json();
     router.push("/");
+    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
+    transactionStore.setIsLoading(false);
   }
 };
 
-// export const api = async <T>(url: string, init?: RequestInit): Promise<T> => {
-//   const response = await apiResponse(url, init);
-//   return await response.json();
-// }
+export const logOutUser = async () => {
+  const userStore = useUserStore();
+  const errorStore = useErrorStore();
+  const transactionStore = useTransactionStore();
 
-// const buildHttpError = async (response: Response): Promise<ApiError> => {
-//   const responseText = await response.text();
+  transactionStore.setIsLoading(true);
 
-//   const error = new Error(responseText) as ApiError;
+  const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/sign-out`, {
+    method: "POST",
+    ...defaultOptions,
+  });
 
-//   error.name = `${response.status} ${response.statusText}`;
-//   error.status = response.status;
-
-//   return error;
-// };
-
-// export const apiResponse = async (url: string, init?: RequestInit): Promise<Response> => {
-//   const apiUrl = `${import.meta.env.VITE_DB_API}/api${url}`;
-
-//   const response = await fetch(apiUrl, {
-//     ...init,
-//   });
-
-//   if (!response.ok) {
-//     return response
-//   }
-
-//   return response;
-// };
+  if (response.status >= 200 && response.status <= 299) {
+    const user = await response.json();
+    userStore.logUserOut();
+    router.push("/");
+    transactionStore.setIsLoading(false);
+  } else {
+    errorStore.addError(`Error logging in: ${await response.text()}`);
+    transactionStore.setIsLoading(false);
+  }
+};

@@ -70,3 +70,26 @@ export const useErrorStore = defineStore({
     hasErrors: (state) => state.errors.length > 0,
   },
 });
+
+export type TransactionRootState = {
+  isLoading: boolean;
+};
+
+export const useTransactionStore = defineStore({
+  id: "transactionStore",
+  state: () =>
+    ({
+      isLoading: false,
+    } as TransactionRootState),
+  actions: {
+    setIsLoading(isLoading: boolean) {
+      this.isLoading = isLoading;
+    },
+    resetIsLoading() {
+      this.isLoading = false;
+    },
+  },
+  getters: {
+    getIsloading: (state) => state.isLoading,
+  },
+});
