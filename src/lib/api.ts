@@ -28,7 +28,7 @@ export const logInUser = async (email: string, password: string) => {
 
   if (response.status >= 200 && response.status <= 299) {
     const user = await response.json();
-    userStore.logUserIn(user);
+    userStore.logUserIn(user.user);
     router.push("/dashboard");
     transactionStore.setIsLoading(false);
   } else {

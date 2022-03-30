@@ -40,7 +40,11 @@ export const useUserStore = defineStore({
       this.isAuthenticated = authStatus;
     },
     setUser(user: User) {
-      this.user = user;
+      this.user = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
     },
   },
   getters: {
