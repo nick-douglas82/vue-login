@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { updateUser } from "../../_utils/api";
-import { verifyCookie, clearCookie } from "../../_utils/cookie";
+import { verifyCookie, clearCookie, createJwtCookie } from "../../_utils/cookie";
 
 export default async (request: VercelRequest, response: VercelResponse) => {
   if (!request.query || !request.query.id) {
@@ -31,6 +31,8 @@ export default async (request: VercelRequest, response: VercelResponse) => {
     if (!user) {
       response.status(422).json("There has been an error, please try again.");
     }
+
+    response.setHeader("Set-Cookie", createJwtCookie(user));
 
     response.status(200).json({ user });
   } catch (error) {

@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "email": "test@test.com",
-    "password": "Formula1"
+    "password": "Test"
 }
 ###
 
@@ -15,12 +15,13 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/api/auth/account/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik5pY2siLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IkZvcm11bGExIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJFYvZlFkZEtmZE9lODRrUEtEVUpQeHV2NFJZaWVLendqanB3MFBKSElHaEMxVzBLUHNJYTBPIiwiaWF0IjoxNjQ4MTM4NjEzfQ.XPLtk7z_rRb1FSNhUq3c7gUE5ppYPZ3Dwfvt6-oaql8
+PATCH http://localhost:3000/api/auth/account/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6Ik5pY2sgRG91Z2xhcyIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJHZPc004YlI2MVN6R2ZqaGp6Y2w0Mi5oMlYwRndyRkJmLmV2LlZ4U2UyTHNjRjJpQWVNZkIuIiwiaWF0IjoxNjQ4NjQ2NTAwLCJleHAiOjE2NDk1MTA1MDB9.UXe1mI0vEzprTjNiXxs-KHOPOVsVXrAk-nZHqtu3OcM
 Content-Type: application/json
 
 {
-    "name": "Nick22"
+    "name": "Nick22",
+    "email": "test@test2.com"
 }
 
 ###
