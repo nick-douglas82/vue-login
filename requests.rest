@@ -15,12 +15,12 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/api/auth/account/test@test.com
+PATCH http://localhost:3000/api/auth/account/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik5pY2siLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IkZvcm11bGExIiwicGFzc3dvcmRoYXNoIjoiJDJhJDEwJFYvZlFkZEtmZE9lODRrUEtEVUpQeHV2NFJZaWVLendqanB3MFBKSElHaEMxVzBLUHNJYTBPIiwiaWF0IjoxNjQ4MTM4NjEzfQ.XPLtk7z_rRb1FSNhUq3c7gUE5ppYPZ3Dwfvt6-oaql8
 Content-Type: application/json
 
 {
-    "name": "Nick"
+    "name": "Nick22"
 }
 
 ###

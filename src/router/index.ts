@@ -44,7 +44,6 @@ router.beforeEach(async (to, from) => {
 
   // Check if there is a user logged in
   if (!userStore.isLoggedIn) {
-    console.log("here");
     await checkAuth().then(async (response) => {
       if (response.status === 200) {
         const user = await response.json();
