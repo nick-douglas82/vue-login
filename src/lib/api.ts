@@ -4,26 +4,25 @@ import defaultOptions from "./defaultOptions";
 
 export const checkAuth = async () => {
   const userStore = useUserStore();
-  const errorStore = useErrorStore();
   const transactionStore = useTransactionStore();
 
   transactionStore.setIsLoading(true);
 
-  const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth`, {
+  return await fetch(`${import.meta.env.VITE_DB_API}/api/auth`, {
     method: "POST",
     ...defaultOptions,
   });
 
-  if (response.status >= 200 && response.status <= 299) {
-    const user = await response.json();
-    userStore.logUserIn(user);
-    router.push("/dashboard");
-    transactionStore.setIsLoading(false);
-  } else {
-    const responseBody = await response.json();
-    userStore.setAuthStatus(responseBody.body.auth);
-    transactionStore.setIsLoading(false);
-  }
+  // if (response.status >= 200 && response.status <= 299) {
+  //   const user = await response.json();
+  //   userStore.logUserIn(user);
+  //   router.push("/dashboard");
+  //   transactionStore.setIsLoading(false);
+  // } else {
+  //   const responseBody = await response.json();
+  //   userStore.setAuthStatus(responseBody.body.auth);
+  //   transactionStore.setIsLoading(false);
+  // }
 };
 
 export const logInUser = async (email: string, password: string) => {
