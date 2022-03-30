@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from "../router";
 import { logOutUser } from "../lib/api";
 import {
   Disclosure,
@@ -46,7 +47,11 @@ const signOut = () => logOutUser();
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
             <router-link
               to="/dashboard"
-              class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-indigo-500"
+              class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:border-gray-300 hover:border-b-2"
+              :class="{
+                'border-b-2 border-indigo-500':
+                  router.currentRoute.value.path === '/dashboard',
+              }"
             >
               Dashboard
             </router-link>

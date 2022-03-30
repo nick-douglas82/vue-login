@@ -55,7 +55,7 @@ const updateProfile = () => {
                         <button
                           @click="updateProfile()"
                           type="button"
-                          class="font-medium text-purple-600 rounded-md hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                          class="font-medium text-indigo-500 rounded-md hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400"
                         >
                           Update
                         </button>
@@ -93,7 +93,7 @@ const updateProfile = () => {
                         <button
                           @click="updateProfile()"
                           type="button"
-                          class="font-medium text-purple-600 rounded-md hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                          class="font-medium text-indigo-500 rounded-md hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400"
                         >
                           Update
                         </button>
