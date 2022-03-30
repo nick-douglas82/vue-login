@@ -1,7 +1,5 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import jwt from "jsonwebtoken";
 import { deleteUser } from "../../_utils/api";
-import { getAuthTokenFromHeader } from "../../_utils/auth";
 import { clearCookie, verifyCookie } from "../../_utils/cookie";
 
 export default async (request: VercelRequest, response: VercelResponse) => {
