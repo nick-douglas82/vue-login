@@ -105,7 +105,7 @@ const updateProfile = () => {
                   >
                     <dt class="text-sm font-medium text-gray-500">Job title</dt>
                     <dd class="flex mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      <span class="flex-grow">Human Resources Manager</span>
+                      <span class="flex-grow">Senior Web Developer</span>
                     </dd>
                   </div>
                 </dl>
