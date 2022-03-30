@@ -16,11 +16,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/dashboard",
     name: "Dashboard",
+    meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "Dashboard" */ "../views/Dashboard.vue"),
   },
   {
     path: "/profile",
     name: "Profile",
+    meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
   },
   {
@@ -42,6 +44,7 @@ router.beforeEach(async (to, from) => {
 
   // Check if there is a user logged in
   if (!userStore.isLoggedIn) {
+    console.log("here");
     await checkAuth().then(async (response) => {
       if (response.status === 200) {
         const user = await response.json();
@@ -51,7 +54,7 @@ router.beforeEach(async (to, from) => {
           router.push("/dashboard");
         }
       } else {
-        if (to.path !== "/") {
+        if (to?.meta?.requiresAuth) {
           router.push("/");
         }
       }
