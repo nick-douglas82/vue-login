@@ -26,6 +26,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "Profile" */ "../views/Profile.vue"),
   },
   {
+    path: "/settings",
+    name: "Settings",
+    meta: { requiresAuth: true },
+    component: () => import(/* webpackChunkName: "Settings" */ "../views/Settings.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue"),

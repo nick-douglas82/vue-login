@@ -30,11 +30,10 @@ export const logInUser = async (email: string, password: string) => {
     const user = await response.json();
     userStore.logUserIn(user.user);
     router.push("/dashboard");
-    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
-    transactionStore.setIsLoading(false);
   }
+  transactionStore.setIsLoading(false);
 };
 
 export const createNewUser = async (email: string, name: string, password: string) => {
@@ -50,11 +49,10 @@ export const createNewUser = async (email: string, name: string, password: strin
   });
   if (response.status >= 200 && response.status <= 299) {
     router.push("/");
-    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
-    transactionStore.setIsLoading(false);
   }
+  transactionStore.setIsLoading(false);
 };
 
 export const updateUser = async (name: string, email: string, id: number) => {
@@ -72,11 +70,28 @@ export const updateUser = async (name: string, email: string, id: number) => {
   if (response.status >= 200 && response.status <= 299) {
     const user = await response.json();
     userStore.logUserIn(user);
-    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
-    transactionStore.setIsLoading(false);
   }
+  transactionStore.setIsLoading(false);
+};
+
+export const deleteUserAccount = async () => {
+  const userStore = useUserStore();
+  const errorStore = useErrorStore();
+  const transactionStore = useTransactionStore();
+  transactionStore.setIsLoading(true);
+  const response = await fetch(`${import.meta.env.VITE_DB_API}/api/auth/delete/${userStore.user.id}`, {
+    method: "DELETE",
+    ...defaultOptions,
+  });
+  if (response.status >= 200 && response.status <= 299) {
+    userStore.logUserOut();
+    router.push("/");
+  } else {
+    errorStore.addError(`Error logging in: ${await response.text()}`);
+  }
+  transactionStore.setIsLoading(false);
 };
 
 export const logOutUser = async () => {
@@ -95,9 +110,8 @@ export const logOutUser = async () => {
     const user = await response.json();
     userStore.logUserOut();
     router.push("/");
-    transactionStore.setIsLoading(false);
   } else {
     errorStore.addError(`Error logging in: ${await response.text()}`);
-    transactionStore.setIsLoading(false);
   }
+  transactionStore.setIsLoading(false);
 };
